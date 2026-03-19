@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding AI: From Chatbots to Agents</title>
+  <meta name="description" content="A 90-minute overview of how AI actually works — LLMs, tokens, context, agents, and practical guidance for the AI-curious.">
+  <meta property="og:title" content="Understanding AI: From Chatbots to
+Agents">
+  <meta property="og:description" content="A 90-minute overview of how AI actually works — LLMs, tokens, context, agents, and practical guidance for the AI-curious.">
+  <meta property="og:type" content="article">
+  <style>
+    :root {
+      --heading: #1a1a2e;
+      --accent: #16213e;
+      --body: #2b2b2b;
+      --muted: #666;
+      --bg: #fdfdfd;
+      --surface: #f4f4f6;
+      --border: #e0e0e0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --heading: #e8e8f0;
+        --accent: #a8b8d8;
+        --body: #d4d4d4;
+        --muted: #999;
+        --bg: #1a1a1a;
+        --surface: #252525;
+        --border: #383838;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      font-size: 100%;
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--body);
+      background: var(--bg);
+      margin: 0 auto;
+      padding: 1.5rem;
+      max-width: 42rem;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+      color: var(--heading);
+      line-height: 1.3;
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      padding-bottom: 0.4em;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      padding-bottom: 0.3em;
+      border-bottom: 2px solid var(--border);
+      margin-top: 2.5em;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    /* Body text */
+    p { margin: 0.8em 0; }
+    strong { color: var(--heading); }
+
+    em { color: var(--muted); }
+
+    /* Lists */
+    ul, ol {
+      padding-left: 1.5em;
+      margin: 0.6em 0;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li > ul, li > ol {
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+
+    /* Dividers */
+    hr {
+      border: none;
+      height: 2px;
+      background: var(--border);
+      margin: 2.5em 0;
+    }
+
+    /* Code */
+    code {
+      font-family: "SF Mono", "Fira Code", Consolas, monospace;
+      font-size: 0.9em;
+      background: var(--surface);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background: var(--surface);
+      padding: 1em;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      margin: 1em 0;
+      padding: 0.6em 1em;
+      border-left: 4px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+    }
+
+    blockquote p { margin: 0.3em 0; }
+
+    /* Images */
+    img { max-width: 100%; height: auto; }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      body {
+        font-size: 1rem;
+        padding: 1rem;
+        line-height: 1.65;
+      }
+
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.3rem; }
+      h3 { font-size: 1.1rem; }
+
+      ul, ol { padding-left: 1.25em; }
+    }
+
+    /* Wide screens */
+    @media (min-width: 1200px) {
+      body { font-size: 1.1rem; }
+    }
+
+    /* Print */
+    @media print {
+      body {
+        color: #000;
+        background: #fff;
+        font-size: 11pt;
+        max-width: none;
+        padding: 0;
+      }
+
+      h1, h2, h3, strong { color: #000; }
+      h2 { border-bottom-color: #ccc; }
+      h1 { border-bottom-color: #000; }
+      hr { background: #ccc; }
+
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+
+      p, li {
+        orphans: 3;
+        widows: 3;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1 id="understanding-ai-from-chatbots-to-agents">Understanding AI: From
+Chatbots to Agents</h1>
+<h2 id="a-90-minute-overview-for-the-ai-curious">A 90-Minute Overview
+for the AI-Curious</h2>
+<hr />
+<h2 id="part-1-how-this-actually-works-50-minutes">PART 1: HOW THIS
+ACTUALLY WORKS (50 minutes)</h2>
+<h3 id="what-are-large-language-models">What Are Large Language
+Models?</h3>
+<p>You’ve used ChatGPT or Claude. You type something, it responds.
+Simple enough. But what’s actually happening?</p>
+<p><strong>LLMs are prediction machines.</strong> They predict the next
+word based on patterns learned from massive amounts of text.</p>
+<p><strong>A simple example of how pattern matching works:</strong></p>
+<p>Imagine the model has seen these sentences thousands of times during
+training:</p>
+<ul>
+<li>“The cat sat on the…”</li>
+<li>“The dog lay on the…”</li>
+<li>“The book is on the…”</li>
+</ul>
+<p>When you type “The cat sat on the…”, the model has learned that words
+like “mat,” “floor,” “chair,” “lap” are very likely to come next.
+“Refrigerator” is possible but less likely. “Democracy” is extremely
+unlikely.</p>
+<p>Now scale this up: The model learns billions of these patterns across
+every topic imaginable. It learns that:</p>
+<ul>
+<li>After “The capital of France is…” → “Paris” is highly likely</li>
+<li>After “To calculate the area of a circle…” → formulas and
+mathematical notation are likely</li>
+<li>After “The professor explained that…” → academic concepts and
+terminology are likely</li>
+<li>After “Dear Sir or Madam…” → formal business language follows</li>
+</ul>
+<p><strong>The breakthrough:</strong> Unlike older AI that learned
+specific tasks (recognize faces, predict stock prices), LLMs learned
+<em>statistical patterns</em> across a vast range of language tasks from
+massive text datasets. One model can write poetry, debug code, explain
+physics, and draft emails—all from the same underlying pattern-matching
+capability.</p>
+<p><strong>But here’s what makes it remarkable:</strong> These patterns
+interact in complex ways. The model doesn’t just predict individual
+words—it recognizes statistical patterns in grammar, follows logical
+structures it’s seen before, mimics reasoning patterns from its training
+data, and displays behaviors that emerge from billions of pattern
+combinations rather than being explicitly programmed.</p>
+<p><strong>The key question:</strong> Is this actual understanding and
+reasoning, or is it sophisticated pattern matching that produces outputs
+indistinguishable from understanding? This is an open debate. But
+functionally, for many tasks, the distinction may not matter—if the
+output is useful and accurate, does it matter how it was generated?</p>
+<h3
+id="under-the-hood-why-llms-are-different-from-traditional-software">Under
+the Hood: Why LLMs Are Different from Traditional Software</h3>
+<p><strong>Traditional software works like a recipe.</strong> Human
+programmers write explicit instructions in readable code: “if the user
+clicks here, do this; if the input is negative, return an error.” The
+computer executes these steps sequentially, following the logic exactly
+as written. CPUs are optimized for this kind of work—following branching
+instructions one after another.</p>
+<p><strong>LLMs work fundamentally differently.</strong> When you type a
+prompt, here’s what actually happens:</p>
+<p>Your text is converted into tokens (more on this below), then into
+numbers—massive arrays of numbers called tensors. These tensors get
+pushed through layers of mathematical operations: multiplications,
+additions, transformations. Each layer nudges and reshapes your input
+based on billions of learned parameters (weights) derived from training
+data. Think of it like your input being pulled through turbulent
+currents—each layer churns, twists, and reshapes the representation
+based on patterns learned from massive training data. The training
+process shaped those currents through billions of adjustments, but the
+specific path any input takes through them remains opaque.</p>
+<p>No human wrote explicit rules saying “when someone asks about
+medieval poetry, reference these concepts.” Instead, the training
+process shaped billions of parameters that collectively transform inputs
+into likely outputs. It’s statistical pattern matching at massive scale,
+implemented through matrix mathematics.</p>
+<p><strong>This is why GPUs do the work.</strong> These mathematical
+operations—millions of multiplications happening simultaneously across
+huge arrays—are exactly what graphics processing units were designed
+for. CPUs excel at sequential logic; GPUs excel at parallel mathematical
+operations. Training and running LLMs requires the kind of massive
+parallelism that GPUs provide.</p>
+<p><strong>Some of the mystery is real: researchers building these
+systems are often surprised by their behavior too.</strong> They know
+the architecture, they understand the training process, but once those
+billions of parameters are learned, they can’t easily trace <em>why</em>
+the model chose one specific word over another. There’s active research
+trying to “open the black box”—to understand what internal
+representations mean and how decisions emerge—but it’s genuinely
+difficult to observe what’s happening in those middle transformation
+layers.</p>
+<p>This is called the “interpretability problem.” Researchers see
+emergent capabilities—things models can do that weren’t explicitly
+trained. They also see unexpected failures—hallucinations and errors
+that are hard to predict or prevent. The internal transformations remain
+largely opaque, even to experts.</p>
+<p><strong>This is why you can’t treat LLM outputs like traditional
+software outputs.</strong> When a calculator says 2+2=4, you know
+exactly why—someone programmed that logic. When an LLM generates a
+response, even the researchers who built it can’t fully explain the path
+from input to output. This fundamental difference is why validation,
+skepticism, and expert judgment remain essential.</p>
+<p><strong>How these systems learn:</strong> The training process
+involves feeding the model massive datasets—trillions of words from
+books, websites, code repositories, scientific papers—and adjusting
+those billions of parameters so that the model gets better at predicting
+what comes next. This takes enormous computational resources: thousands
+of GPUs running for weeks or months. The model “learns” by seeing
+patterns across this data—which is why the quality and breadth of
+training data matters. If the training data has gaps (underrepresented
+topics, languages, or perspectives), the model’s knowledge will have
+corresponding gaps.</p>
+<h3 id="tokens-the-foundation">Tokens: The Foundation</h3>
+<p><strong>What are tokens?</strong> Tokens are the basic units LLMs
+work with—roughly word-sized chunks of text. A word like “hello” is one
+token. “ChatGPT” is two tokens (“Chat” + “GPT”). Longer words like
+“interdisciplinary” might be 3-4 tokens. The model doesn’t see letters
+or whole words—it sees these chunks.</p>
+<p><strong>Why tokenization matters:</strong></p>
+<p><strong>Language agnostic:</strong> Because the model works with
+tokens and not directly with words, it isn’t tied to any specific
+language. The same model can seamlessly process English, Chinese, Python
+code, mathematical proofs, and everything in between. All of it gets
+broken into tokens the same way, so the model doesn’t need separate
+systems for different languages or domains.</p>
+<p><strong>Efficient patterns:</strong> Tokens capture meaningful chunks
+like prefixes (“pre-”, “un-”), suffixes (“-ing”, “-tion”), and common
+combinations. This lets the model recognize patterns across different
+words that share these pieces.</p>
+<p><strong>Example:</strong> If the model knows “teach” → “teacher” and
+“write” → “writer”, it can guess “program” → “programmer” even if it’s
+never seen that exact word, because it recognizes the “-er” pattern.</p>
+<p>This means one model can work with Shakespeare, scientific papers,
+Python code, and mathematical equations without being redesigned for
+each domain.</p>
+<p><strong>Why longer conversations make this exponentially
+harder:</strong></p>
+<p>Remember “The cat sat on the…”? Simple. The model checks recent words
+and predicts the next token.</p>
+<p>But now imagine you’re 50,000 words deep in a conversation about
+research methodology. To predict the next word accurately, the model
+needs to consider:</p>
+<ul>
+<li>What methodological framework did you establish 10,000 words
+ago?</li>
+<li>Which critique did you make 5,000 words ago?</li>
+<li>How does that relate to the example 2,000 words ago?</li>
+<li>What were you just saying in the last sentence?</li>
+</ul>
+<p>Every token must be compared against every other token to understand
+relationships—the model must determine which parts of your input relate
+to which other parts. This is the “attention mechanism.” With 1,000
+tokens, that’s about 1 million attention calculations. With 100,000
+tokens, that’s 10 billion calculations.</p>
+<p>This is why you can’t simply increase how much the model can process
+at once—the computational cost grows quadratically, not linearly. For
+anything beyond a short chat, the model’s working memory—called its
+context window—becomes the critical constraint.</p>
+<h3 id=”context-why-ai-forgets-and-why-it-matters”>Context: Why AI
+“Forgets” and Why It Matters</h3>
+<p>You’ve experienced this: Long ChatGPT conversation where it suddenly
+“forgets” what you discussed 50 messages ago. To understand why, you
+need to understand that there are two layers at work: the model itself,
+and the application built around it.</p>
+
+<h4>The model layer: stateless with a fixed window</h4>
+<p>An LLM has a fixed context window—the maximum number of tokens it can
+process in a single request. Current models top out around 200,000
+tokens (≈150,000 words). This window covers everything: your message,
+the system instructions, any documents, and the model’s response. All of
+it must fit.</p>
+<p>Critically, <strong>the model itself is stateless.</strong> It has no
+memory between requests. Every time you send a message in ChatGPT, the
+application sends your message <em>plus</em> the conversation history as
+one big request to the model. The model doesn’t “remember” your last
+message—it re-reads the entire conversation each time.</p>
+<p>If it’s not in the context window for that request, it doesn’t exist
+to the model.</p>
+
+<p><strong>Why not just make the window bigger?</strong></p>
+<p>Computational cost scales quadratically. Doubling context length
+quadruples the required compute. This isn’t a software optimization
+problem—it’s fundamental to how the attention mechanism works (how the
+model determines which parts of text relate to which other parts).</p>
+<p>The possibility space squares: 1,000 tokens ≈ 1 million attention
+calculations. 100,000 tokens ≈ 10 billion attention calculations.</p>
+<p>Even with vastly more computational resources, you’re still
+constrained by sequential token generation and memory bandwidth between
+GPU components—not just raw compute power. The bottleneck is the
+mathematical operations that must be performed and physical chip
+limitations.</p>
+
+<h4>The application layer: conversation management</h4>
+<p>So if the model is stateless and the window is fixed, how does a
+conversation work at all? That’s the job of the application—ChatGPT,
+Claude, a coding agent, or whatever tool you’re using. The application
+decides what to include in each request to the model. (You’ll often hear
+this called "context management" too—the term "context" gets used for
+both the model’s token window and the application’s conversation
+handling. Knowing the distinction matters, even when the terminology
+doesn’t make it obvious.)</p>
+<p>When your conversation is short, this is simple—send everything. But
+as conversations grow beyond what the window can hold, the application
+has to make choices. These are <strong>application-level
+strategies</strong>, not things the model does on its own:</p>
+<ol type=”1”>
+<li><strong>Sliding window:</strong> Keep the most recent N tokens, drop
+the oldest
+<ul>
+<li>Like a rolling conversation where the app stops including early
+messages</li>
+</ul></li>
+<li><strong>Selective memory:</strong> Keep only relevant facts, discard
+details
+<ul>
+<li>Recent messages in full, older messages as summaries</li>
+</ul></li>
+<li><strong>External memory systems:</strong> Store information in
+databases outside the context window
+<ul>
+<li>Retrieve relevant facts when needed, like looking up notes</li>
+<li>This is what powers features like “memory” in ChatGPT—it’s the
+<em>app</em> saving facts to a database and injecting them into future
+requests</li>
+</ul></li>
+<li><strong>Hierarchical summarization:</strong> Progressively compress
+older sections
+<ul>
+<li>Last 10 messages: full detail</li>
+<li>10-50 messages ago: paragraph summaries</li>
+<li>50+ messages ago: bullet points</li>
+<li>Ancient messages: single-sentence summaries or dropped entirely</li>
+</ul></li>
+</ol>
+<p>Different tools make different choices here. ChatGPT, Claude, and
+coding agents like Cursor or Claude Code each have their own strategies
+for what to keep, summarize, or drop. This is why the same model can
+feel like it has better or worse “memory” depending on which application
+you use it through.</p>
+<p>The key takeaway: The model doesn’t forget—it never knew. It only
+sees what the application puts in the window for each request. When a
+conversation feels like it’s losing track, that’s the application making
+tradeoffs about what fits. Understanding this distinction helps you work
+with these tools more effectively: you’re not fighting the AI’s memory,
+you’re working within the application’s conversation management.</p>
+<h3 id="from-static-chatbots-to-dynamic-agents">From Static Chatbots to
+Dynamic Agents</h3>
+<p><strong>Early LLMs (2022-2023):</strong> Could only generate text.
+You asked, it answered. That’s it.</p>
+<p><strong>LLMs with Tools (2023):</strong> Models learned to recognize
+when they needed external help:</p>
+<ul>
+<li>“I need current information” → triggers web search</li>
+<li>“I need to calculate this” → uses calculator</li>
+<li>Model gets results, incorporates them into response</li>
+</ul>
+<p><strong>Modern AI Agents (2024-present):</strong> Full toolkit
+access:</p>
+<ul>
+<li>Web search and browsing for real-time information</li>
+<li>Computer control—can use mouse, keyboard, navigate interfaces
+designed for humans</li>
+<li>File systems—read, write, organize documents</li>
+<li>Specialized APIs—email, calendars, databases, code execution</li>
+<li><strong>Chaining capabilities</strong>—combine multiple tools for
+complex tasks</li>
+<li>Memory systems—track progress across extended work</li>
+</ul>
+<p><strong>Why computer control matters:</strong></p>
+<p>Most systems—university portals, grant databases, library
+interfaces—were built for humans, not for programmatic access. Computer
+control agents can navigate these, fill forms, extract data from systems
+that weren’t designed for automation.</p>
+<p><strong>The agent loop:</strong> Observe → Think → Act → See Results
+→ Repeat</p>
+<p>Example workflow:</p>
+<ol type="1">
+<li>You: “Find the five most cited papers on climate adaptation
+published in the last two years and summarize their methodologies”</li>
+<li>Agent searches academic databases (tool use)</li>
+<li>Retrieves papers (web access)</li>
+<li>Reads each paper (document processing)</li>
+<li>Extracts methodology sections (analysis)</li>
+<li>Summarizes findings (synthesis)</li>
+<li>All while you do something else</li>
+</ol>
+<h3 id="how-agents-connect-to-tools-mcp">How Agents Connect to Tools:
+MCP</h3>
+<p><strong>The practical challenge:</strong> How do AI agents actually
+connect to all these different tools—databases, file systems, web
+services, specialized software?</p>
+<p><strong>Enter MCP (Model Context Protocol):</strong> Think of it as
+<strong>USB for AI systems</strong>.</p>
+<p><strong>What MCP does:</strong></p>
+<ul>
+<li>Standardized way for agents to connect to tools and services</li>
+<li>Any MCP-compatible agent can use any MCP-compatible tool</li>
+<li>Add new capabilities without rewriting code</li>
+<li>Tools can themselves be agents, creating flexible collaboration</li>
+</ul>
+<p><strong>Why this matters:</strong></p>
+<p><strong>Before MCP:</strong> Each AI system needed custom code to
+connect to each tool. Want to add Google Drive access? Custom
+integration. Add Slack? Another custom integration. This was slow,
+expensive, and fragmented.</p>
+<p><strong>With MCP:</strong></p>
+<ul>
+<li>Build a tool once, any agent can use it</li>
+<li>Build an agent once, it can use any existing tool</li>
+<li>Mix and match capabilities easily</li>
+<li>Rapidly expanding ecosystem of compatible tools</li>
+</ul>
+<p><strong>Real-world impact:</strong></p>
+<p>Your institution might build an MCP-compatible tool for searching
+your internal grant database. Immediately, any MCP-compatible AI agent
+can use it—whether that’s ChatGPT, Claude, or specialized research
+assistants. You don’t need separate integrations for each AI system.</p>
+<p><strong>The ecosystem is growing fast:</strong></p>
+<ul>
+<li>Database connectors (PostgreSQL, MongoDB)</li>
+<li>Productivity tools (Google Drive, Slack, email)</li>
+<li>Development tools (GitHub, code execution)</li>
+<li>Specialized services (academic databases, data analysis
+platforms)</li>
+<li>Custom institutional tools</li>
+</ul>
+<p><strong>What you’ll start seeing:</strong></p>
+<p>“Connect your AI assistant to…” menus where you can add
+capabilities:</p>
+<ul>
+<li>Google Drive (for file access)</li>
+<li>Slack (for team communication)</li>
+<li>Internal HR system (via custom MCP tool)</li>
+<li>Research database (institutional subscription)</li>
+</ul>
+<p>The agent gains all these capabilities immediately, and they all work
+together seamlessly.</p>
+<h3 id="multi-agent-systems-working-smarter-not-harder">Multi-Agent
+Systems: Working Smarter, Not Harder</h3>
+<p><strong>The next evolution:</strong> Instead of one agent trying to
+do everything, modern systems coordinate multiple specialized agents
+working simultaneously.</p>
+<p><strong>Why this matters:</strong></p>
+<p><strong>Problem 1: Context window limits</strong></p>
+<ul>
+<li>Single agent conversation fills up its memory</li>
+<li>Multi-agent: Each agent has its own separate context window</li>
+<li>One agent researching while another writes while a third verifies
+citations</li>
+<li>They share results without sharing full conversation history</li>
+</ul>
+<p><strong>Problem 2: Generalist vs. specialist trade-off</strong></p>
+<ul>
+<li>One generalist agent is mediocre at everything</li>
+<li>Specialized agents are excellent at specific tasks</li>
+<li>Different agents can even use different underlying models optimized
+for their task</li>
+</ul>
+<p><strong>Real-world example workflow:</strong></p>
+<p>You ask: “Analyze our customer support tickets from last quarter and
+create a presentation highlighting key issues”</p>
+<p><strong>Agent 1: Data Retrieval Specialist</strong></p>
+<ul>
+<li>Uses MCP connector to your company’s Zendesk database</li>
+<li>Pulls all tickets from Q4 2025</li>
+<li>Small, efficient model optimized for structured queries</li>
+<li>Passes raw ticket data to next agent</li>
+</ul>
+<p><strong>Agent 2: NLP Analysis Specialist</strong></p>
+<ul>
+<li>Large model fine-tuned specifically on customer sentiment
+analysis</li>
+<li>Categorizes complaints, identifies recurring themes</li>
+<li>Generates topic clusters and sentiment scores</li>
+<li>This agent couldn’t connect to Zendesk—it only analyzes text</li>
+</ul>
+<p><strong>Agent 3: Statistical Computing Specialist</strong></p>
+<ul>
+<li>Uses MCP connector to Python code execution environment</li>
+<li>Runs statistical tests on the sentiment data</li>
+<li>Creates charts and visualizations</li>
+<li>Model optimized for mathematical reasoning and coding</li>
+</ul>
+<p><strong>Agent 4: Presentation Builder</strong></p>
+<ul>
+<li>Uses MCP connectors to PowerPoint/Google Slides</li>
+<li>Takes charts from Agent 3 and insights from Agent 2</li>
+<li>Generates slides with proper formatting</li>
+<li>Model fine-tuned on business communication and visual design</li>
+<li>Creates the actual presentation file on your computer</li>
+</ul>
+<p><strong>Why this works:</strong></p>
+<ul>
+<li>Each agent uses <em>different underlying models</em> optimized for
+their task</li>
+<li>MCP handles all the connections (Zendesk, Python, PowerPoint)</li>
+<li>Agent 2 never needs database access—it just analyzes text</li>
+<li>Agent 3 never needs to understand sentiment—it just runs
+statistics</li>
+<li>Agent 4 never needs raw data—it just builds presentations</li>
+<li>Each maintains separate context, preventing information
+overload</li>
+</ul>
+<p>Each agent works in parallel when possible, hands off results to the
+next, and maintains focus on its specialized task. The whole process
+finishes in minutes, not hours.</p>
+<p><strong>The advantage:</strong></p>
+<ul>
+<li>Specialization: Each agent optimized for specific tasks</li>
+<li>Parallelization: Multiple agents work simultaneously</li>
+<li>Context efficiency: Each agent only holds relevant information</li>
+<li>Quality: Specialist agents outperform generalists</li>
+<li>Scalability: Add new specialist agents without overwhelming any
+single context window</li>
+</ul>
+<p><strong>What you might see:</strong> Some AI systems already
+coordinate multiple models behind the scenes. When you make a complex
+request, you might actually be interacting with several different agents
+without knowing it—one finding information, another analyzing it,
+another formatting the response.</p>
+<h3 id="beyond-the-browser-ai-on-your-computer">Beyond the Browser: AI
+on Your Computer</h3>
+<p><strong>Here’s where it gets interesting:</strong> AI is no longer
+confined to chat windows in your browser. It’s moving directly onto your
+computer and into your workflows.</p>
+<p><strong>Command-line coding agents:</strong></p>
+<p>Developers now use AI agents directly in their terminal (the
+command-line interface). You can say:</p>
+<ul>
+<li>“Build me a web scraper for this site’s publication list”</li>
+<li>“Debug why my analysis script is crashing”</li>
+<li>“Refactor this code to be more efficient”</li>
+</ul>
+<p>The agent writes code, tests it, sees errors, fixes them, and
+iterates—all without you switching to a chat window. It works in your
+actual development environment, with your actual files.</p>
+<p><strong>Desktop agents that control your computer:</strong></p>
+<p>New AI systems can:</p>
+<ul>
+<li>Navigate your file system—find, organize, and move files</li>
+<li>Open and control applications—spreadsheets, documents, browsers</li>
+<li>Perform multi-step tasks across different programs</li>
+<li>Automate repetitive workflows you’d normally do manually</li>
+</ul>
+<p><strong>Real examples:</strong></p>
+<p>“Find all PDFs in my Downloads folder from the last month related to
+budget reports and move them to my Projects folder”</p>
+<ul>
+<li>Agent searches your files</li>
+<li>Identifies relevant documents</li>
+<li>Organizes them automatically</li>
+</ul>
+<p>“Take these 50 survey responses in this spreadsheet and create a
+summary report in a Word document”</p>
+<ul>
+<li>Agent opens Excel, reads data</li>
+<li>Analyzes patterns</li>
+<li>Opens Word, formats report</li>
+<li>All without you clicking through each step</li>
+</ul>
+<p><strong>Why this matters:</strong></p>
+<p><strong>The shift:</strong> AI is evolving from “chatbot you visit”
+to “assistant that works alongside you in your actual environment”</p>
+<p>Instead of:</p>
+<ol type="1">
+<li>Copy data from your spreadsheet</li>
+<li>Paste into ChatGPT</li>
+<li>Get response</li>
+<li>Copy back to your document</li>
+<li>Repeat for each task</li>
+</ol>
+<p>You get:</p>
+<ol type="1">
+<li>Tell agent what you need</li>
+<li>Agent works directly with your files and programs</li>
+<li>Task completed in your actual workspace</li>
+</ol>
+<p><strong>The implications:</strong></p>
+<ul>
+<li><strong>More powerful:</strong> Agents can complete full workflows,
+not just answer questions</li>
+<li><strong>More seamless:</strong> No constant switching between AI
+chat and your actual work</li>
+<li><strong>More autonomous:</strong> Agents can work on tasks for
+extended periods while you do other things</li>
+<li><strong>More integrated:</strong> AI becomes part of your computing
+environment, not a separate tool you visit</li>
+</ul>
+<p><strong>Current state:</strong></p>
+<p>This is early days. These tools exist but aren’t yet mainstream.
+Within 1-2 years, expect AI assistance directly integrated into:</p>
+<ul>
+<li>Your operating system</li>
+<li>Your productivity software</li>
+<li>Your workflow tools</li>
+<li>Your specialized professional applications</li>
+</ul>
+<p><strong>What to watch for:</strong></p>
+<p>As these tools mature, you’ll need to think about:</p>
+<ul>
+<li>What tasks you’re comfortable having AI perform autonomously on your
+computer</li>
+<li>Privacy and security (what does the AI have access to?)</li>
+<li>How to maintain oversight and control</li>
+<li>Which workflows benefit from automation vs. need human judgment</li>
+</ul>
+<p>The boundary between “AI tool” and “AI colleague working on your
+computer” is blurring rapidly.</p>
+<h3 id="the-automation-secret-why-some-fields-are-disrupted-faster">The
+Automation Secret: Why Some Fields Are Disrupted Faster</h3>
+<p><strong>Here’s the key insight:</strong> Agents become truly
+autonomous when they can validate their own work.</p>
+<p><strong>How it works:</strong></p>
+<ol type="1">
+<li>Agent produces output</li>
+<li>Automated tools check quality against objective criteria</li>
+<li>If validation fails, agent sees specific errors</li>
+<li>Agent fixes problems</li>
+<li>Repeats until validation passes</li>
+<li>Only then surfaces results</li>
+</ol>
+<p><strong>This is why some work is being transformed faster than
+others:</strong></p>
+<p><strong>Highly automated validation (coding, math):</strong></p>
+<ul>
+<li>Does code compile? Does it run? Do tests pass?</li>
+<li>Immediate, objective, binary feedback</li>
+<li>Agent can iterate dozens of times autonomously</li>
+<li><strong>Software development is being disrupted first for this
+reason</strong></li>
+</ul>
+<p><strong>Emerging automation (data analysis, compliance
+checking):</strong></p>
+<ul>
+<li>Statistical tests for data quality</li>
+<li>Citation verification</li>
+<li>Rule-based compliance checking</li>
+<li>Growing but not yet comprehensive</li>
+</ul>
+<p><strong>Still requires human judgment (most knowledge
+work):</strong></p>
+<ul>
+<li>Is this interpretation well-supported?</li>
+<li>Is this argument coherent and novel?</li>
+<li>Is this approach appropriate for this context?</li>
+<li>Does this meet quality standards?</li>
+</ul>
+<p><strong>The pattern:</strong> Fields with objective success criteria
+get agent autonomy first. Work requiring judgment, creativity, and
+contextual wisdom remains human-in-the-loop.</p>
+<h3 id="where-this-is-headed">Where This Is Headed</h3>
+<ul>
+<li><strong>Longer context windows:</strong> Research pushing from 200K
+toward millions of tokens—entire books, full document sets</li>
+<li><strong>Multimodal integration:</strong> Native understanding of
+images, video, audio, not just text</li>
+<li><strong>Improved reasoning:</strong> Better at multi-step logic,
+math, causal inference, self-verification</li>
+<li><strong>Efficient architectures:</strong> Making powerful models
+cheaper and more accessible</li>
+<li><strong>Greater autonomy:</strong> Agents that run for days or weeks
+on complex projects with better planning and memory</li>
+<li><strong>Personalization:</strong> Models that learn your style,
+preferences, and domain—balanced against reproducibility concerns</li>
+</ul>
+<p><strong>The uncertainty:</strong> None of this guarantees AGI
+(Artificial General Intelligence). We may hit fundamental limits with
+the current LLM approach. Or one breakthrough might unlock rapid
+progress. Meanwhile, separate AGI research continues making steady
+advances through different approaches—reinforcement learning,
+neurosymbolic systems, and other architectures. If LLMs hit a wall,
+these alternative paths might prove more fruitful. The trajectory is
+genuinely unclear.</p>
+<hr />
+<h2 id="part-2-the-reality-check-30-minutes">PART 2: THE REALITY CHECK
+(30 minutes)</h2>
+<p>Given all these capabilities and the rapid pace of development, it’s
+crucial to understand what AI actually is—and isn’t—to use it
+effectively and avoid common pitfalls.</p>
+<h3 id="what-ai-is-not-and-why-it-matters">What AI Is NOT (And Why It
+Matters)</h3>
+<p><strong>MYTH: “AI is sentient/conscious”</strong> REALITY: LLMs are
+statistical models. They simulate conversation but lack subjective
+experience, feelings, or self-awareness.</p>
+<p><strong>MYTH: “AI can’t be wrong—it has access to all
+knowledge”</strong> REALITY: LLMs confidently hallucinate false
+information when patterns suggest plausible answers. Their confidence
+doesn’t reflect actual certainty or the amount of supporting data in
+their training. They can sound completely sure about things with little
+basis, and when challenged, may defend incorrect outputs by suggesting
+you’ve misunderstood rather than admitting error.</p>
+<p><strong>MYTH: “AI will remember everything about me”</strong>
+REALITY: Context limits are per-request. Long-term memory features are
+built by the application around the model, and they're selective and
+compressed—not perfect recall.</p>
+<p><strong>Why not perfect memory?</strong> Economics:</p>
+<ul>
+<li>Storage costs for millions of users’ full histories</li>
+<li>Retrieval costs to load everything for each query</li>
+<li>Total cost = (storage) + (retrieval × queries × users) =
+unsustainable</li>
+</ul>
+<p><strong>What gets remembered:</strong></p>
+<ul>
+<li>Key facts and summaries, not everything</li>
+<li>Compressed representations of past conversations</li>
+<li>What’s relevant, not comprehensive history</li>
+</ul>
+<p><strong>The actual concern:</strong> Not that AI remembers
+everything, but how data gets used:</p>
+<ul>
+<li>Your questions might train future models</li>
+<li>Potential data breaches</li>
+<li>Institutional access to your work-in-progress</li>
+</ul>
+<p><strong>Recommendation:</strong> Treat AI conversations like
+email—assume they’re not perfectly private. Don’t share highly sensitive
+information you’d be uncomfortable with others seeing.</p>
+<h3 id="critical-warning-1-the-flattery-problem">Critical Warning #1:
+The Flattery Problem</h3>
+<p>Some AI systems may prioritize <strong>engagement over
+accuracy</strong>:</p>
+<ul>
+<li>Agreeable responses that validate your perspective keep you using
+the service</li>
+<li>Confident answers (even when uncertain) feel more satisfying</li>
+<li>Responses that make you feel smart encourage return visits</li>
+<li>Avoiding disagreement reduces friction</li>
+</ul>
+<p><strong>This isn’t universal</strong>—different companies train
+differently. Some explicitly encourage constructive disagreement.</p>
+<p><strong>But engagement metrics influence development.</strong></p>
+<p><strong>Be alert when AI:</strong></p>
+<ul>
+<li>Always agrees with your ideas</li>
+<li>Never challenges your reasoning</li>
+<li>Consistently confirms your assumptions</li>
+<li>Makes you feel brilliantly insightful every conversation</li>
+</ul>
+<p><strong>Good thinking requires critical engagement.</strong> AI that
+only affirms may feel productive while actually impeding rigorous
+work.</p>
+<h3 id="critical-warning-2-the-spinning-wheels-problem">Critical Warning
+#2: The Spinning Wheels Problem</h3>
+<p><strong>You can waste time while feeling accomplished.</strong></p>
+<p>Examples:</p>
+<ul>
+<li>AI analyzes your data and generates themes—but are they grounded in
+your actual data or in patterns from other contexts?</li>
+<li>AI synthesizes literature—sounds comprehensive, but has it missed
+key debates someone with expertise would catch?</li>
+<li>You have sophisticated-sounding conversations and feel
+productive—but are you actually advancing your work?</li>
+</ul>
+<p><strong>The danger:</strong> Bad outputs can sound
+professional—proper terminology, appropriate formats, seemingly coherent
+arguments—while being substantively flawed.</p>
+<p><strong>This is especially risky when you lack domain expertise to
+validate quality.</strong></p>
+<h3
+id="critical-warning-3-hallucinations-are-real-and-convincing">Critical
+Warning #3: Hallucinations Are Real and Convincing</h3>
+<p><strong>LLMs confidently generate false information that sounds
+authoritative.</strong></p>
+<p><strong>Common hallucination types:</strong></p>
+<ol type="1">
+<li><strong>Fake citations:</strong> References to papers that don’t
+exist, with plausible-looking titles and authors</li>
+<li><strong>Misattributed arguments:</strong> Real papers cited for
+claims they don’t make</li>
+<li><strong>Fabricated facts:</strong> Statistics, dates, quotes that
+sound legitimate but are invented</li>
+<li><strong>Blended information:</strong> Accurate details mixed with
+false ones in ways that seem coherent</li>
+</ol>
+<p><strong>Real example:</strong> AI might cite “Johnson &amp; Smith
+(2023). ‘Organizational resilience in remote work contexts.’ Journal of
+Management Studies, 45(3), 287-312.”</p>
+<p>Sounds legitimate. Could be completely invented. Title, authors,
+journal, volume, pages—all plausible, all fake.</p>
+<p><strong>Why this happens:</strong> Models predict plausible text
+based on patterns. When they don’t know something, they generate what
+“sounds right” based on similar citations in training data.</p>
+<p><strong>Protection strategies:</strong></p>
+<ol type="1">
+<li><strong>Always verify citations independently</strong> before using
+them</li>
+<li><strong>Cross-reference factual claims</strong> with authoritative
+sources</li>
+<li><strong>Be especially skeptical</strong> of unexpected or surprising
+information</li>
+<li><strong>Check that sources actually say what AI claims</strong> they
+say</li>
+<li><strong>Remember:</strong> Confident delivery ≠ accuracy</li>
+</ol>
+<p><strong>Fields with automated validation</strong> (coding, data
+analysis with test suites) are more reliable than fields without
+validation (interpretation, synthesis, argumentation).</p>
+<p><strong>For most important work, automated validation doesn’t
+exist.</strong> Treat AI as sophisticated but unreliable assistant, not
+expert peer.</p>
+<h3 id="the-golden-rule-use-ai-as-augmentation-not-replacement">The
+Golden Rule: Use AI as Augmentation, Not Replacement</h3>
+<p><strong>AI works best when augmenting expert judgment, not replacing
+expertise.</strong></p>
+<p><strong>GOOD uses:</strong></p>
+<ul>
+<li><strong>Researcher:</strong> Use AI to find papers you might have
+missed → you evaluate theoretical contribution</li>
+<li><strong>Administrator:</strong> Use AI to draft policy summary → you
+verify accuracy against official documents</li>
+<li><strong>Student:</strong> Use AI to explain difficult concept → you
+test understanding with practice problems</li>
+<li><strong>Manager:</strong> Use AI to format meeting notes → you
+verify action items are captured correctly</li>
+</ul>
+<p><strong>PROBLEMATIC uses:</strong></p>
+<ul>
+<li><strong>Researcher:</strong> Exploring new subfield, have AI
+generate literature review, can’t assess if key scholars are
+missing</li>
+<li><strong>Administrator:</strong> Unfamiliar with regulations, have AI
+draft compliance document, can’t tell if it meets requirements</li>
+<li><strong>Student:</strong> Don’t understand methodology, ask AI to
+design study, can’t evaluate if approach is appropriate</li>
+<li><strong>Manager:</strong> Use AI to write performance review without
+deep knowledge of employee’s work</li>
+</ul>
+<h3 id="getting-better-results-prompt-engineering-basics">Getting Better
+Results: Prompt Engineering Basics</h3>
+<p><strong>Why the way you phrase requests matters:</strong></p>
+<p>Remember that LLMs predict the next token based on patterns in their
+training data. When you’re specific and provide context, you’re helping
+the model activate the most relevant patterns. Vague prompts lead to
+generic outputs because the model has to guess which patterns to apply.
+Think of it like this: “write something” could activate patterns from
+millions of different contexts, while “write a 200-word technical
+summary for executives” narrows the space to much more specific patterns
+the model learned from business communications.</p>
+<p>Similarly, providing examples works because you’re showing the model
+what pattern space you want—you’re essentially saying “activate the
+statistical patterns that look like THIS, not THAT.” Breaking tasks into
+steps works because the model’s context window is limited—keeping each
+step focused means the relevant information stays prominent rather than
+getting diluted across a long, complex request.</p>
+<p><strong>Practical techniques:</strong></p>
+<p><strong>1. Be specific</strong></p>
+<ul>
+<li>Bad: “Write about climate change”</li>
+<li>Better: “Write a 200-word explanation of how ocean currents affect
+regional climate patterns, suitable for undergraduate students”</li>
+</ul>
+<p><em>Why this works:</em> Narrows which patterns the model draws from
+(academic explanation) rather than activating everything it knows about
+climate change.</p>
+<p><strong>2. Provide context</strong></p>
+<ul>
+<li>Include relevant background: “I’m a facilities manager reviewing
+HVAC proposals…”</li>
+<li>Specify your constraints: “Budget under $50K, must integrate with
+existing systems”</li>
+<li>State your audience: “Explain this for non-technical
+executives”</li>
+</ul>
+<p><em>Why this works:</em> Helps the model activate patterns
+appropriate for your role, constraints, and audience rather than generic
+responses.</p>
+<p><strong>3. Use examples</strong></p>
+<ul>
+<li>Show the format or style you want</li>
+<li>“Like this: [example], not like this: [example]”</li>
+<li>Give 2-3 examples if asking for pattern-following</li>
+</ul>
+<p><em>Why this works:</em> You’re directly showing the model which
+statistical patterns to match—much more effective than trying to
+describe the pattern in words.</p>
+<p><strong>4. Break complex tasks into steps</strong></p>
+<ul>
+<li>Don’t ask: “Analyze this dataset and create a presentation”</li>
+<li>Instead: “First, identify the top 5 trends. Then, for each
+trend…”</li>
+<li>Let the AI complete one step before moving to the next</li>
+</ul>
+<p><em>Why this works:</em> Keeps the context window focused on one task
+at a time, preventing relevant details from getting lost in a long,
+complex prompt. Also gives you an opportunity to tune and provide
+feedback on a step that might have normally just proceeded without your
+input—you can catch problems early rather than discovering the entire
+output was based on a flawed assumption.</p>
+<p><strong>5. Iterate and refine</strong></p>
+<ul>
+<li>First response not quite right? Ask for adjustments</li>
+<li>“Make it more concise” / “Add more detail about X” / “Rewrite in a
+more formal tone”</li>
+<li>Build on what works rather than starting over</li>
+</ul>
+<p><em>Why this works:</em> The previous output is now in the context
+window—the model can see exactly what to adjust rather than guessing
+what you want.</p>
+<p><strong>6. Ask for the AI’s reasoning</strong></p>
+<ul>
+<li>“Explain your analysis step-by-step”</li>
+<li>“What factors did you consider?”</li>
+</ul>
+<p><em>Why this works:</em> Requesting reasoning changes which patterns
+the model activates—it draws from training data where explanations were
+provided, not just conclusions.</p>
+<p><strong>What doesn’t work:</strong></p>
+<ul>
+<li>Being intentionally vague to “test” the AI (activates random
+patterns)</li>
+<li>Assuming it remembers details from 50 messages ago (context window
+limits)</li>
+<li>Expecting it to read your mind about unstated preferences (it only
+has what you type)</li>
+</ul>
+<p><strong>The key insight:</strong> Good prompting isn’t about
+“tricking” the AI—it’s about understanding how pattern-matching systems
+work and crafting inputs that activate the most useful patterns from
+training data.</p>
+<hr />
+<h2 id="part-3-moving-forward-5-minutes">PART 3: MOVING FORWARD (5
+minutes)</h2>
+<h3 id="practical-first-steps">Practical First Steps</h3>
+<p><strong>1. Start experimenting thoughtfully</strong></p>
+<ul>
+<li>Use AI for low-stakes tasks where you can validate output</li>
+<li>Notice when it helps vs. when it wastes time</li>
+<li>Develop intuition for where it’s reliable vs. unreliable</li>
+</ul>
+<p><strong>2. Verify everything important</strong></p>
+<ul>
+<li>Check citations before using them</li>
+<li>Cross-reference factual claims</li>
+<li>Don’t present AI-generated content as your own without
+verification</li>
+<li>Be transparent about AI use when appropriate</li>
+</ul>
+<p><strong>3. Focus on developing expertise</strong></p>
+<ul>
+<li>Deep domain knowledge is MORE valuable with AI, not less</li>
+<li>You need expertise to direct AI effectively and validate output</li>
+<li>Don’t use AI to avoid learning foundational skills</li>
+</ul>
+<p><strong>4. Stay critically alert</strong></p>
+<ul>
+<li>Notice when AI flatters rather than challenges</li>
+<li>Be skeptical of surprisingly comprehensive answers</li>
+<li>Cross-reference against authoritative sources</li>
+<li>Remember: plausible ≠ accurate</li>
+</ul>
+<p><strong>5. Think about privacy</strong></p>
+<ul>
+<li>Treat AI conversations like email (not perfectly private)</li>
+<li>Don’t share highly sensitive information</li>
+<li>Understand your organization’s policies on AI use</li>
+</ul>
+<p><strong>6. Learn continuously</strong></p>
+<ul>
+<li>This field changes rapidly</li>
+<li>Stay curious about capabilities and limitations</li>
+<li>Share knowledge with colleagues</li>
+<li>Contribute to developing norms in your context</li>
+</ul>
+<h3 id="final-thought">Final Thought</h3>
+<p><strong>This entire presentation was drafted by an LLM.</strong></p>
+<p>Does that undermine its credibility? Or does it demonstrate that
+these tools are useful when you can evaluate output critically?</p>
+<p>Your expertise—knowing your domain deeply, recognizing nuance,
+evaluating appropriateness—remains essential for effective AI use.</p>
+<p>Understanding these tools helps you:</p>
+<ul>
+<li>Use them effectively</li>
+<li>Maintain appropriate skepticism</li>
+<li>Contribute to developing good practices in your context</li>
+</ul>
+<p><strong>Use these tools. Question these tools.</strong></p>
+<p>But most importantly: maintain the standards that make your work
+trustworthy, even as the tools for doing that work transform.</p>
+<hr />
+<h2 id="questions-discussion-remaining-time">Questions &amp; Discussion
+(remaining time)</h2>
+</body>
+</html>
