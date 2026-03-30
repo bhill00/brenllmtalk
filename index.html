@@ -256,6 +256,24 @@ Agents">
       color: var(--accent);
       text-decoration: underline;
     }
+
+    /* Back to top links */
+    .back-top {
+      text-align: right;
+      margin: 1.5rem 0 0;
+      font-size: 0.8rem;
+    }
+    .back-top a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .back-top a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    @media print {
+      .back-top { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -348,6 +366,7 @@ reasoning, or is it sophisticated pattern matching that produces outputs
 indistinguishable from understanding? This is an open debate. But
 functionally, for many tasks, the distinction may not matter—if the
 output is useful and accurate, does it matter how it was generated?</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3
 id="under-the-hood-why-llms-are-different-from-traditional-software">Under
 the Hood: Why LLMs Are Different from Traditional Software</h3>
@@ -410,6 +429,7 @@ patterns across this data—which is why the quality and breadth of
 training data matters. If the training data has gaps (underrepresented
 topics, languages, or perspectives), the model’s knowledge will have
 corresponding gaps.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="tokens-the-foundation">Tokens: The Foundation</h3>
 <p><strong>What are tokens?</strong> Tokens are the basic units LLMs
 work with—roughly word-sized chunks of text. A word like “hello” is one
@@ -456,6 +476,7 @@ tokens, that’s 10 billion calculations.</p>
 at once—the computational cost grows quadratically, not linearly. For
 anything beyond a short chat, the model’s working memory—called its
 context window—becomes the critical constraint.</p>
+<p class=”back-top”><a href=”#understanding-ai-from-chatbots-to-agents”>&#8593; Contents</a></p>
 <h3 id=”context-why-ai-forgets-and-why-it-matters”>Context: Why AI
 “Forgets” and Why It Matters</h3>
 <p>You’ve experienced this: Long ChatGPT conversation where it suddenly
@@ -543,6 +564,7 @@ conversation feels like it’s losing track, that’s the application making
 tradeoffs about what fits. Understanding this distinction helps you work
 with these tools more effectively: you’re not fighting the AI’s memory,
 you’re working within the application’s conversation management.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="from-static-chatbots-to-dynamic-agents">From Static Chatbots to
 Dynamic Agents</h3>
 <p><strong>Early LLMs (2022-2023):</strong> Could only generate text.
@@ -584,6 +606,7 @@ published in the last two years and summarize their methodologies”</li>
 <li>Summarizes findings (synthesis)</li>
 <li>All while you do something else</li>
 </ol>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="how-agents-connect-to-tools-mcp">How Agents Connect to Tools:
 MCP</h3>
 <p><strong>The practical challenge:</strong> How do AI agents actually
@@ -635,6 +658,7 @@ capabilities:</p>
 </ul>
 <p>The agent gains all these capabilities immediately, and they all work
 together seamlessly.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="multi-agent-systems-working-smarter-not-harder">Multi-Agent
 Systems: Working Smarter, Not Harder</h3>
 <p><strong>The next evolution:</strong> Instead of one agent trying to
@@ -718,6 +742,7 @@ coordinate multiple models behind the scenes. When you make a complex
 request, you might actually be interacting with several different agents
 without knowing it—one finding information, another analyzing it,
 another formatting the response.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="beyond-the-browser-ai-on-your-computer">Beyond the Browser: AI
 on Your Computer</h3>
 <p><strong>Here’s where it gets interesting:</strong> AI is no longer
@@ -806,7 +831,8 @@ computer</li>
 </ul>
 <p>The boundary between “AI tool” and “AI colleague working on your
 computer” is blurring rapidly.</p>
-<h3 id="the-automation-secret-why-some-fields-are-disrupted-faster">The
+<p class=”back-top”><a href=”#understanding-ai-from-chatbots-to-agents”>&#8593; Contents</a></p>
+<h3 id=”the-automation-secret-why-some-fields-are-disrupted-faster”>The
 Automation Secret: Why Some Fields Are Disrupted Faster</h3>
 <p><strong>Here’s the key insight:</strong> Agents become truly
 autonomous when they can validate their own work.</p>
@@ -848,6 +874,7 @@ work):</strong></p>
 <p><strong>The pattern:</strong> Fields with objective success criteria
 get agent autonomy first. Work requiring judgment, creativity, and
 contextual wisdom remains human-in-the-loop.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="where-this-is-headed">Where This Is Headed</h3>
 <ul>
 <li><strong>Longer context windows:</strong> Research pushing from 200K
@@ -871,6 +898,7 @@ advances through different approaches—reinforcement learning,
 neurosymbolic systems, and other architectures. If LLMs hit a wall,
 these alternative paths might prove more fruitful. The trajectory is
 genuinely unclear.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <hr />
 <h2 id="part-2-the-reality-check-30-minutes">PART 2: THE REALITY CHECK
 (30 minutes)</h2>
@@ -916,6 +944,7 @@ everything, but how data gets used:</p>
 <p><strong>Recommendation:</strong> Treat AI conversations like
 email—assume they’re not perfectly private. Don’t share highly sensitive
 information you’d be uncomfortable with others seeing.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="critical-warning-1-the-flattery-problem">Critical Warning #1:
 The Flattery Problem</h3>
 <p>Some AI systems may prioritize <strong>engagement over
@@ -940,6 +969,7 @@ differently. Some explicitly encourage constructive disagreement.</p>
 <p><strong>Good thinking requires critical engagement.</strong> AI that
 only affirms may feel productive while actually impeding rigorous
 work.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="critical-warning-2-the-spinning-wheels-problem">Critical Warning
 #2: The Spinning Wheels Problem</h3>
 <p><strong>You can waste time while feeling accomplished.</strong></p>
@@ -957,6 +987,7 @@ professional—proper terminology, appropriate formats, seemingly coherent
 arguments—while being substantively flawed.</p>
 <p><strong>This is especially risky when you lack domain expertise to
 validate quality.</strong></p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3
 id="critical-warning-3-hallucinations-are-real-and-convincing">Critical
 Warning #3: Hallucinations Are Real and Convincing</h3>
@@ -999,6 +1030,7 @@ validation (interpretation, synthesis, argumentation).</p>
 <p><strong>For most important work, automated validation doesn’t
 exist.</strong> Treat AI as sophisticated but unreliable assistant, not
 expert peer.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="the-golden-rule-use-ai-as-augmentation-not-replacement">The
 Golden Rule: Use AI as Augmentation, Not Replacement</h3>
 <p><strong>AI works best when augmenting expert judgment, not replacing
@@ -1026,6 +1058,7 @@ design study, can’t evaluate if approach is appropriate</li>
 <li><strong>Manager:</strong> Use AI to write performance review without
 deep knowledge of employee’s work</li>
 </ul>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="getting-better-results-prompt-engineering-basics">Getting Better
 Results: Prompt Engineering Basics</h3>
 <p><strong>Why the way you phrase requests matters:</strong></p>
@@ -1118,6 +1151,7 @@ has what you type)</li>
 “tricking” the AI—it’s about understanding how pattern-matching systems
 work and crafting inputs that activate the most useful patterns from
 training data.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <hr />
 <h2 id="part-3-moving-forward-5-minutes">PART 3: MOVING FORWARD (5
 minutes)</h2>
@@ -1162,6 +1196,7 @@ verification</li>
 <li>Share knowledge with colleagues</li>
 <li>Contribute to developing norms in your context</li>
 </ul>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="final-thought">Final Thought</h3>
 <p><strong>This entire presentation was drafted by an LLM.</strong></p>
 <p>Does that undermine its credibility? Or does it demonstrate that
@@ -1177,6 +1212,7 @@ evaluating appropriateness—remains essential for effective AI use.</p>
 <p><strong>Use these tools. Question these tools.</strong></p>
 <p>But most importantly: maintain the standards that make your work
 trustworthy, even as the tools for doing that work transform.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <hr />
 <h2 id="questions-discussion-remaining-time">Questions &amp; Discussion
 (remaining time)</h2>
