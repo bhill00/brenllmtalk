@@ -330,23 +330,23 @@ word based on patterns learned from massive amounts of text.</p>
 <p>Imagine the model has seen these sentences thousands of times during
 training:</p>
 <ul>
-<li>“The cat sat on the…”</li>
-<li>“The dog lay on the…”</li>
-<li>“The book is on the…”</li>
+<li>"The cat sat on the…"</li>
+<li>"The dog lay on the…"</li>
+<li>"The book is on the…"</li>
 </ul>
-<p>When you type “The cat sat on the…”, the model has learned that words
-like “mat,” “floor,” “chair,” “lap” are very likely to come next.
-“Refrigerator” is possible but less likely. “Democracy” is extremely
+<p>When you type "The cat sat on the…", the model has learned that words
+like "mat," "floor," "chair," "lap" are very likely to come next.
+"Refrigerator" is possible but less likely. "Democracy" is extremely
 unlikely.</p>
 <p>Now scale this up: The model learns billions of these patterns across
 every topic imaginable. It learns that:</p>
 <ul>
-<li>After “The capital of France is…” → “Paris” is highly likely</li>
-<li>After “To calculate the area of a circle…” → formulas and
+<li>After "The capital of France is…" → "Paris" is highly likely</li>
+<li>After "To calculate the area of a circle…" → formulas and
 mathematical notation are likely</li>
-<li>After “The professor explained that…” → academic concepts and
+<li>After "The professor explained that…" → academic concepts and
 terminology are likely</li>
-<li>After “Dear Sir or Madam…” → formal business language follows</li>
+<li>After "Dear Sir or Madam…" → formal business language follows</li>
 </ul>
 <p><strong>The breakthrough:</strong> Unlike older AI that learned
 specific tasks (recognize faces, predict stock prices), LLMs learned
@@ -370,8 +370,8 @@ output is useful and accurate, does it matter how it was generated?</p>
 id="under-the-hood-why-llms-are-different-from-traditional-software">Under
 the Hood: Why LLMs Are Different from Traditional Software</h3>
 <p><strong>Traditional software works like a recipe.</strong> Human
-programmers write explicit instructions in readable code: “if the user
-clicks here, do this; if the input is negative, return an error.” The
+programmers write explicit instructions in readable code: "if the user
+clicks here, do this; if the input is negative, return an error." The
 computer executes these steps sequentially, following the logic exactly
 as written. CPUs are optimized for this kind of work—following branching
 instructions one after another.</p>
@@ -387,8 +387,8 @@ currents—each layer churns, twists, and reshapes the representation
 based on patterns learned from massive training data. The training
 process shaped those currents through billions of adjustments, but the
 specific path any input takes through them remains opaque.</p>
-<p>No human wrote explicit rules saying “when someone asks about
-medieval poetry, reference these concepts.” Instead, the training
+<p>No human wrote explicit rules saying "when someone asks about
+medieval poetry, reference these concepts." Instead, the training
 process shaped billions of parameters that collectively transform inputs
 into likely outputs. It’s statistical pattern matching at massive scale,
 implemented through matrix mathematics.</p>
@@ -403,11 +403,11 @@ systems are often surprised by their behavior too.</strong> They know
 the architecture, they understand the training process, but once those
 billions of parameters are learned, they can’t easily trace <em>why</em>
 the model chose one specific word over another. There’s active research
-trying to “open the black box”—to understand what internal
+trying to "open the black box"—to understand what internal
 representations mean and how decisions emerge—but it’s genuinely
 difficult to observe what’s happening in those middle transformation
 layers.</p>
-<p>This is called the “interpretability problem.” Researchers see
+<p>This is called the "interpretability problem." Researchers see
 emergent capabilities—things models can do that weren’t explicitly
 trained. They also see unexpected failures—hallucinations and errors
 that are hard to predict or prevent. The internal transformations remain
@@ -423,7 +423,7 @@ involves feeding the model massive datasets—trillions of words from
 books, websites, code repositories, scientific papers—and adjusting
 those billions of parameters so that the model gets better at predicting
 what comes next. This takes enormous computational resources: thousands
-of GPUs running for weeks or months. The model “learns” by seeing
+of GPUs running for weeks or months. The model "learns" by seeing
 patterns across this data—which is why the quality and breadth of
 training data matters. If the training data has gaps (underrepresented
 topics, languages, or perspectives), the model’s knowledge will have
@@ -431,9 +431,9 @@ corresponding gaps.</p>
 <p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="tokens-the-foundation">Tokens: The Foundation</h3>
 <p><strong>What are tokens?</strong> Tokens are the basic units LLMs
-work with—roughly word-sized chunks of text. A word like “hello” is one
-token. “ChatGPT” is two tokens (“Chat” + “GPT”). Longer words like
-“interdisciplinary” might be 3-4 tokens. The model doesn’t see letters
+work with—roughly word-sized chunks of text. A word like "hello" is one
+token. "ChatGPT" is two tokens ("Chat" + "GPT"). Longer words like
+"interdisciplinary" might be 3-4 tokens. The model doesn’t see letters
 or whole words—it sees these chunks.</p>
 <p><strong>Why tokenization matters:</strong></p>
 <p><strong>Language agnostic:</strong> Because the model works with
@@ -443,18 +443,18 @@ code, mathematical proofs, and everything in between. All of it gets
 broken into tokens the same way, so the model doesn’t need separate
 systems for different languages or domains.</p>
 <p><strong>Efficient patterns:</strong> Tokens capture meaningful chunks
-like prefixes (“pre-”, “un-”), suffixes (“-ing”, “-tion”), and common
+like prefixes ("pre-", "un-"), suffixes ("-ing", "-tion"), and common
 combinations. This lets the model recognize patterns across different
 words that share these pieces.</p>
-<p><strong>Example:</strong> If the model knows “teach” → “teacher” and
-“write” → “writer”, it can guess “program” → “programmer” even if it’s
-never seen that exact word, because it recognizes the “-er” pattern.</p>
+<p><strong>Example:</strong> If the model knows "teach" → "teacher" and
+"write" → "writer", it can guess "program" → "programmer" even if it’s
+never seen that exact word, because it recognizes the "-er" pattern.</p>
 <p>This means one model can work with Shakespeare, scientific papers,
 Python code, and mathematical equations without being redesigned for
 each domain.</p>
 <p><strong>Why longer conversations make this exponentially
 harder:</strong></p>
-<p>Remember “The cat sat on the…”? Simple. The model checks recent words
+<p>Remember "The cat sat on the…"? Simple. The model checks recent words
 and predicts the next token.</p>
 <p>But now imagine you’re 50,000 words deep in a conversation about
 research methodology. To predict the next word accurately, the model
@@ -468,18 +468,18 @@ ago?</li>
 </ul>
 <p>Every token must be compared against every other token to understand
 relationships—the model must determine which parts of your input relate
-to which other parts. This is the “attention mechanism.” With 1,000
+to which other parts. This is the "attention mechanism." With 1,000
 tokens, that’s about 1 million attention calculations. With 100,000
 tokens, that’s 10 billion calculations.</p>
 <p>This is why you can’t simply increase how much the model can process
 at once—the computational cost grows quadratically, not linearly. For
 anything beyond a short chat, the model’s working memory—called its
 context window—becomes the critical constraint.</p>
-<p class=”back-top”><a href=”#understanding-ai-from-chatbots-to-agents”>&#8593; Contents</a></p>
-<h3 id=”context-why-ai-forgets-and-why-it-matters”>Context: Why AI
-“Forgets” and Why It Matters</h3>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
+<h3 id="context-why-ai-forgets-and-why-it-matters">Context: Why AI
+"Forgets" and Why It Matters</h3>
 <p>You’ve experienced this: Long ChatGPT conversation where it suddenly
-“forgets” what you discussed 50 messages ago. To understand why, you
+"forgets" what you discussed 50 messages ago. To understand why, you
 need to understand that there are two layers at work: the model itself,
 and the application built around it.</p>
 
@@ -492,7 +492,7 @@ it must fit.</p>
 <p>Critically, <strong>the model itself is stateless.</strong> It has no
 memory between requests. Every time you send a message in ChatGPT, the
 application sends your message <em>plus</em> the conversation history as
-one big request to the model. The model doesn’t “remember” your last
+one big request to the model. The model doesn’t "remember" your last
 message—it re-reads the entire conversation each time.</p>
 <p>If it’s not in the context window for that request, it doesn’t exist
 to the model.</p>
@@ -523,7 +523,7 @@ doesn’t make it obvious.)</p>
 as conversations grow beyond what the window can hold, the application
 has to make choices. These are <strong>application-level
 strategies</strong>, not things the model does on its own:</p>
-<ol type=”1”>
+<ol type="1">
 <li><strong>Sliding window:</strong> Keep the most recent N tokens, drop
 the oldest
 <ul>
@@ -539,7 +539,7 @@ details
 databases outside the context window
 <ul>
 <li>Retrieve relevant facts when needed, like looking up notes</li>
-<li>This is what powers features like “memory” in ChatGPT—it’s the
+<li>This is what powers features like "memory" in ChatGPT—it’s the
 <em>app</em> saving facts to a database and injecting them into future
 requests</li>
 </ul></li>
@@ -555,7 +555,7 @@ older sections
 <p>Different tools make different choices here. ChatGPT, Claude, and
 coding agents like Cursor or Claude Code each have their own strategies
 for what to keep, summarize, or drop. This is why the same model can
-feel like it has better or worse “memory” depending on which application
+feel like it has better or worse "memory" depending on which application
 you use it through.</p>
 <p>The key takeaway: The model doesn’t forget—it never knew. It only
 sees what the application puts in the window for each request. When a
@@ -571,8 +571,8 @@ You asked, it answered. That’s it.</p>
 <p><strong>LLMs with Tools (2023):</strong> Models learned to recognize
 when they needed external help:</p>
 <ul>
-<li>“I need current information” → triggers web search</li>
-<li>“I need to calculate this” → uses calculator</li>
+<li>"I need current information" → triggers web search</li>
+<li>"I need to calculate this" → uses calculator</li>
 <li>Model gets results, incorporates them into response</li>
 </ul>
 <p><strong>Modern AI Agents (2024-present):</strong> Full toolkit
@@ -596,8 +596,8 @@ that weren’t designed for automation.</p>
 → Repeat</p>
 <p>Example workflow:</p>
 <ol type="1">
-<li>You: “Find the five most cited papers on climate adaptation
-published in the last two years and summarize their methodologies”</li>
+<li>You: "Find the five most cited papers on climate adaptation
+published in the last two years and summarize their methodologies"</li>
 <li>Agent searches academic databases (tool use)</li>
 <li>Retrieves papers (web access)</li>
 <li>Reads each paper (document processing)</li>
@@ -647,7 +647,7 @@ platforms)</li>
 <li>Custom institutional tools</li>
 </ul>
 <p><strong>What you’ll start seeing:</strong></p>
-<p>“Connect your AI assistant to…” menus where you can add
+<p>"Connect your AI assistant to…" menus where you can add
 capabilities:</p>
 <ul>
 <li>Google Drive (for file access)</li>
@@ -680,8 +680,8 @@ citations</li>
 for their task</li>
 </ul>
 <p><strong>Real-world example workflow:</strong></p>
-<p>You ask: “Analyze our customer support tickets from last quarter and
-create a presentation highlighting key issues”</p>
+<p>You ask: "Analyze our customer support tickets from last quarter and
+create a presentation highlighting key issues"</p>
 <p><strong>Agent 1: Data Retrieval Specialist</strong></p>
 <ul>
 <li>Uses MCP connector to your company’s Zendesk database</li>
@@ -751,9 +751,9 @@ computer and into your workflows.</p>
 <p>Developers now use AI agents directly in their terminal (the
 command-line interface). You can say:</p>
 <ul>
-<li>“Build me a web scraper for this site’s publication list”</li>
-<li>“Debug why my analysis script is crashing”</li>
-<li>“Refactor this code to be more efficient”</li>
+<li>"Build me a web scraper for this site’s publication list"</li>
+<li>"Debug why my analysis script is crashing"</li>
+<li>"Refactor this code to be more efficient"</li>
 </ul>
 <p>The agent writes code, tests it, sees errors, fixes them, and
 iterates—all without you switching to a chat window. It works in your
@@ -767,15 +767,15 @@ actual development environment, with your actual files.</p>
 <li>Automate repetitive workflows you’d normally do manually</li>
 </ul>
 <p><strong>Real examples:</strong></p>
-<p>“Find all PDFs in my Downloads folder from the last month related to
-budget reports and move them to my Projects folder”</p>
+<p>"Find all PDFs in my Downloads folder from the last month related to
+budget reports and move them to my Projects folder"</p>
 <ul>
 <li>Agent searches your files</li>
 <li>Identifies relevant documents</li>
 <li>Organizes them automatically</li>
 </ul>
-<p>“Take these 50 survey responses in this spreadsheet and create a
-summary report in a Word document”</p>
+<p>"Take these 50 survey responses in this spreadsheet and create a
+summary report in a Word document"</p>
 <ul>
 <li>Agent opens Excel, reads data</li>
 <li>Analyzes patterns</li>
@@ -783,8 +783,8 @@ summary report in a Word document”</p>
 <li>All without you clicking through each step</li>
 </ul>
 <p><strong>Why this matters:</strong></p>
-<p><strong>The shift:</strong> AI is evolving from “chatbot you visit”
-to “assistant that works alongside you in your actual environment”</p>
+<p><strong>The shift:</strong> AI is evolving from "chatbot you visit"
+to "assistant that works alongside you in your actual environment"</p>
 <p>Instead of:</p>
 <ol type="1">
 <li>Copy data from your spreadsheet</li>
@@ -828,10 +828,10 @@ computer</li>
 <li>How to maintain oversight and control</li>
 <li>Which workflows benefit from automation vs. need human judgment</li>
 </ul>
-<p>The boundary between “AI tool” and “AI colleague working on your
-computer” is blurring rapidly.</p>
-<p class=”back-top”><a href=”#understanding-ai-from-chatbots-to-agents”>&#8593; Contents</a></p>
-<h3 id=”the-automation-secret-why-some-fields-are-disrupted-faster”>The
+<p>The boundary between "AI tool" and "AI colleague working on your
+computer" is blurring rapidly.</p>
+<p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
+<h3 id="the-automation-secret-why-some-fields-are-disrupted-faster">The
 Automation Secret: Why Some Fields Are Disrupted Faster</h3>
 <p><strong>Here’s the key insight:</strong> Agents become truly
 autonomous when they can validate their own work.</p>
@@ -906,17 +906,17 @@ crucial to understand what AI actually is—and isn’t—to use it
 effectively and avoid common pitfalls.</p>
 <h3 id="what-ai-is-not-and-why-it-matters">What AI Is NOT (And Why It
 Matters)</h3>
-<p><strong>MYTH: “AI is sentient/conscious”</strong> REALITY: LLMs are
+<p><strong>MYTH: "AI is sentient/conscious"</strong> REALITY: LLMs are
 statistical models. They simulate conversation but lack subjective
 experience, feelings, or self-awareness.</p>
-<p><strong>MYTH: “AI can’t be wrong—it has access to all
-knowledge”</strong> REALITY: LLMs confidently hallucinate false
+<p><strong>MYTH: "AI can’t be wrong—it has access to all
+knowledge"</strong> REALITY: LLMs confidently hallucinate false
 information when patterns suggest plausible answers. Their confidence
 doesn’t reflect actual certainty or the amount of supporting data in
 their training. They can sound completely sure about things with little
 basis, and when challenged, may defend incorrect outputs by suggesting
 you’ve misunderstood rather than admitting error.</p>
-<p><strong>MYTH: “AI will remember everything about me”</strong>
+<p><strong>MYTH: "AI will remember everything about me"</strong>
 REALITY: Context limits are per-request. Long-term memory features are
 built by the application around the model, and they're selective and
 compressed—not perfect recall.</p>
@@ -1003,14 +1003,14 @@ sound legitimate but are invented</li>
 <li><strong>Blended information:</strong> Accurate details mixed with
 false ones in ways that seem coherent</li>
 </ol>
-<p><strong>Real example:</strong> AI might cite “Johnson &amp; Smith
+<p><strong>Real example:</strong> AI might cite "Johnson &amp; Smith
 (2023). ‘Organizational resilience in remote work contexts.’ Journal of
-Management Studies, 45(3), 287-312.”</p>
+Management Studies, 45(3), 287-312."</p>
 <p>Sounds legitimate. Could be completely invented. Title, authors,
 journal, volume, pages—all plausible, all fake.</p>
 <p><strong>Why this happens:</strong> Models predict plausible text
 based on patterns. When they don’t know something, they generate what
-“sounds right” based on similar citations in training data.</p>
+"sounds right" based on similar citations in training data.</p>
 <p><strong>Protection strategies:</strong></p>
 <ol type="1">
 <li><strong>Always verify citations independently</strong> before using
@@ -1065,34 +1065,34 @@ Results: Prompt Engineering Basics</h3>
 training data. When you’re specific and provide context, you’re helping
 the model activate the most relevant patterns. Vague prompts lead to
 generic outputs because the model has to guess which patterns to apply.
-Think of it like this: “write something” could activate patterns from
-millions of different contexts, while “write a 200-word technical
-summary for executives” narrows the space to much more specific patterns
+Think of it like this: "write something" could activate patterns from
+millions of different contexts, while "write a 200-word technical
+summary for executives" narrows the space to much more specific patterns
 the model learned from business communications.</p>
 <p>Similarly, providing examples works because you’re showing the model
-what pattern space you want—you’re essentially saying “activate the
-statistical patterns that look like THIS, not THAT.” Breaking tasks into
+what pattern space you want—you’re essentially saying "activate the
+statistical patterns that look like THIS, not THAT." Breaking tasks into
 steps works because the model’s context window is limited—keeping each
 step focused means the relevant information stays prominent rather than
 getting diluted across a long, complex request.</p>
 <p><strong>Practical techniques:</strong></p>
 <p><strong>1. Be specific</strong></p>
 <ul>
-<li>Bad: “Write about climate change”</li>
-<li>Better: “Write a 200-word explanation of how ocean currents affect
-regional climate patterns, suitable for undergraduate students”</li>
+<li>Bad: "Write about climate change"</li>
+<li>Better: "Write a 200-word explanation of how ocean currents affect
+regional climate patterns, suitable for undergraduate students"</li>
 </ul>
 <p><em>Why this works:</em> Narrows which patterns the model draws from
 (academic explanation) rather than activating everything it knows about
 climate change.</p>
 <p><strong>2. Provide context</strong></p>
 <ul>
-<li>Include relevant background: “I’m a facilities manager reviewing
-HVAC proposals…”</li>
-<li>Specify your constraints: “Budget under $50K, must integrate with
-existing systems”</li>
-<li>State your audience: “Explain this for non-technical
-executives”</li>
+<li>Include relevant background: "I’m a facilities manager reviewing
+HVAC proposals…"</li>
+<li>Specify your constraints: "Budget under $50K, must integrate with
+existing systems"</li>
+<li>State your audience: "Explain this for non-technical
+executives"</li>
 </ul>
 <p><em>Why this works:</em> Helps the model activate patterns
 appropriate for your role, constraints, and audience rather than generic
@@ -1100,7 +1100,7 @@ responses.</p>
 <p><strong>3. Use examples</strong></p>
 <ul>
 <li>Show the format or style you want</li>
-<li>“Like this: [example], not like this: [example]”</li>
+<li>"Like this: [example], not like this: [example]"</li>
 <li>Give 2-3 examples if asking for pattern-following</li>
 </ul>
 <p><em>Why this works:</em> You’re directly showing the model which
@@ -1108,9 +1108,9 @@ statistical patterns to match—much more effective than trying to
 describe the pattern in words.</p>
 <p><strong>4. Break complex tasks into steps</strong></p>
 <ul>
-<li>Don’t ask: “Analyze this dataset and create a presentation”</li>
-<li>Instead: “First, identify the top 5 trends. Then, for each
-trend…”</li>
+<li>Don’t ask: "Analyze this dataset and create a presentation"</li>
+<li>Instead: "First, identify the top 5 trends. Then, for each
+trend…"</li>
 <li>Let the AI complete one step before moving to the next</li>
 </ul>
 <p><em>Why this works:</em> Keeps the context window focused on one task
@@ -1122,8 +1122,8 @@ output was based on a flawed assumption.</p>
 <p><strong>5. Iterate and refine</strong></p>
 <ul>
 <li>First response not quite right? Ask for adjustments</li>
-<li>“Make it more concise” / “Add more detail about X” / “Rewrite in a
-more formal tone”</li>
+<li>"Make it more concise" / "Add more detail about X" / "Rewrite in a
+more formal tone"</li>
 <li>Build on what works rather than starting over</li>
 </ul>
 <p><em>Why this works:</em> The previous output is now in the context
@@ -1131,15 +1131,15 @@ window—the model can see exactly what to adjust rather than guessing
 what you want.</p>
 <p><strong>6. Ask for the AI’s reasoning</strong></p>
 <ul>
-<li>“Explain your analysis step-by-step”</li>
-<li>“What factors did you consider?”</li>
+<li>"Explain your analysis step-by-step"</li>
+<li>"What factors did you consider?"</li>
 </ul>
 <p><em>Why this works:</em> Requesting reasoning changes which patterns
 the model activates—it draws from training data where explanations were
 provided, not just conclusions.</p>
 <p><strong>What doesn’t work:</strong></p>
 <ul>
-<li>Being intentionally vague to “test” the AI (activates random
+<li>Being intentionally vague to "test" the AI (activates random
 patterns)</li>
 <li>Assuming it remembers details from 50 messages ago (context window
 limits)</li>
@@ -1147,7 +1147,7 @@ limits)</li>
 has what you type)</li>
 </ul>
 <p><strong>The key insight:</strong> Good prompting isn’t about
-“tricking” the AI—it’s about understanding how pattern-matching systems
+"tricking" the AI—it’s about understanding how pattern-matching systems
 work and crafting inputs that activate the most useful patterns from
 training data.</p>
 <p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
