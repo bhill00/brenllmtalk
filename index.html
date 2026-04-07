@@ -475,6 +475,19 @@ tokens, that’s 10 billion calculations.</p>
 at once—the computational cost grows quadratically, not linearly. For
 anything beyond a short chat, the model’s working memory—called its
 context window—becomes the critical constraint.</p>
+<p><strong>One token at a time:</strong> Here's a detail that surprises most
+people. The model never plans out a full response or drafts a paragraph
+in its head. It only ever predicts the very next token. Once it picks
+that token, it appends it to the input and runs the entire prediction
+process again from scratch. This is called <strong>autoregressive
+generation</strong>, and it repeats, one token at a time, until the
+model produces a stop signal. Because each new token becomes part of the
+input for every prediction that follows, an awkward word choice or small
+error early in a response gets baked into the context for all subsequent
+tokens. Small mistakes can compound, especially in long outputs. It also
+means the model can never "go back and fix" an earlier sentence the way
+you would revise a draft. What's written is written, and the model just
+keeps moving forward.</p>
 <p class="back-top"><a href="#understanding-ai-from-chatbots-to-agents">&#8593; Contents</a></p>
 <h3 id="context-why-ai-forgets-and-why-it-matters">Context: Why AI
 "Forgets" and Why It Matters</h3>
